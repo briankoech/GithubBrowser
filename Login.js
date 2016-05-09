@@ -3,6 +3,12 @@
 import React, { Component, Text, StyleSheet, View, Image, TextInput, TouchableHighlight } from 'react-native';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+  }
+  onLogginPressed = () => {
+    console.log(this.state.username, this.state.password);
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -12,14 +18,20 @@ export default class Login extends Component {
         <Text style={styles.heading}>
           Github browser
         </Text>
-        <TextInput style={styles.input}
+        <TextInput 
+        onChangeText={(text) => {this.setState({username: text})}}
+        style={styles.input}
         placeholder="Github username">
         </TextInput>
-        <TextInput style={styles.input}
+        <TextInput
+        onChangeText={(text) => {this.setState({password: text})}}
+        style={styles.input}
         placeholder="Github password"
         secureTextEntry="true">
         </TextInput>
-        <TouchableHighlight style={styles.button}>
+        <TouchableHighlight 
+        onPress={this.onLogginPressed}
+        style={styles.button}>
           <Text style={styles.buttonText}>
             Log in
           </Text>
