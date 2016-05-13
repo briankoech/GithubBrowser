@@ -13,6 +13,7 @@ import {
   ActivityIndicatorIOS
 } from 'react-native';
 import Login from './Login.js';
+import AuthService from './AuthService';
 
 class GithubBrowser extends Component {
   constructor(props) {
@@ -22,6 +23,16 @@ class GithubBrowser extends Component {
       checkingAuth: true
     };
   }
+  componentDidMount() {
+    AuthService.getAuthInfo((err, authInfo) => {
+      console.log(authInfo);
+      this.setState({
+        checkingAuth: false,
+        isLoggedIn: authInfo != null
+      });
+    });
+  }
+
   render() {
     if(this.state.checkingAuth) {
       return (

@@ -7,7 +7,7 @@ const userKey = 'user';
 
 class AuthService {
   getAuthInfo(cb) {
-    AsyncStorage.multiGet([authKey, userKey], (err, value) => {
+    AsyncStorage.multiGet([authKey, userKey], (err, val) => {
       if(err) {
         return cb(err);
       }
@@ -19,16 +19,13 @@ class AuthService {
       if(!zippedObj[authKey]) {
         cb();
       }
-
       let authInfo = {
         header: {
           Authorization: 'Basic ' + zippedObj[authKey]
         },
         user: JSON.parse(zippedObj[userKey])
-      }
-
+      };
       return cb(null, authInfo);
-
     });
   }
   login(creds, cb) {
@@ -59,6 +56,7 @@ class AuthService {
         [authKey, encodedAuth],
         [userKey, JSON.stringify(results)]
       ], (err)=> {
+          //  encodedAuth, results
         if(err) {
           throw err;
         }

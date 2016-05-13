@@ -1,11 +1,10 @@
-
-import React, { 
-  Component,
-  Text, 
-  StyleSheet, 
-  View, 
-  Image, 
-  TextInput, 
+import React, { Component } from 'react';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
   TouchableHighlight,
 ActivityIndicatorIOS } from 'react-native';
 import buffer from 'buffer';
@@ -26,7 +25,7 @@ export default class Login extends Component {
       password: this.state.password
     }, (results)=> {
       this.setState(Object.assign({
-        showProgress: false 
+        showProgress: false
       }, results));
 
       if(results.success && this.props.onLogin) {
@@ -49,13 +48,13 @@ export default class Login extends Component {
     }
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} 
+        <Image style={styles.logo}
         source={require('image!Octocat')} >
         </Image>
         <Text style={styles.heading}>
           Github browser
         </Text>
-        <TextInput 
+        <TextInput
           onChangeText={(text) => {this.setState({username: text})}}
           style={styles.input}
           placeholder="Github username">
@@ -66,7 +65,7 @@ export default class Login extends Component {
           placeholder="Github password"
           secureTextEntry="true">
         </TextInput>
-        <TouchableHighlight 
+        <TouchableHighlight
           onPress={this.onLogginPressed.bind(this)}
           style={styles.button}>
           <Text style={styles.buttonText}>
@@ -76,13 +75,13 @@ export default class Login extends Component {
 
         {errorCtrl}
 
-        <ActivityIndicatorIOS 
+        <ActivityIndicatorIOS
           animating={this.state.showProgress}
-          size="large" 
+          size="large"
           style={styles.loader}
           />
       </View>
-    ); 
+    );
   }
 }
 
