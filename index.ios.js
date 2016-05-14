@@ -25,7 +25,6 @@ class GithubBrowser extends Component {
   }
   componentDidMount() {
     AuthService.getAuthInfo((err, authInfo) => {
-      console.log(authInfo);
       this.setState({
         checkingAuth: false,
         isLoggedIn: authInfo != null

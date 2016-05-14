@@ -15,7 +15,7 @@ class AuthService {
         cb();
       }
 
-      let zippedObj = _.zipObject(val);
+      let zippedObj = _.fromPairs(val);
       if(!zippedObj[authKey]) {
         cb();
       }
@@ -52,7 +52,7 @@ class AuthService {
       return response.json();
     })
     .then((results)=> {
-      AsyncStorage.multiset([
+      AsyncStorage.multiSet([
         [authKey, encodedAuth],
         [userKey, JSON.stringify(results)]
       ], (err)=> {
