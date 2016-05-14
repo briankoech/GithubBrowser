@@ -13,6 +13,7 @@ import {
   ActivityIndicatorIOS
 } from 'react-native';
 import Login from './Login.js';
+import AppContainer from './AppContainer';
 import AuthService from './AuthService';
 
 class GithubBrowser extends Component {
@@ -45,11 +46,7 @@ class GithubBrowser extends Component {
     }
     if(this.state.isLoggedIn) {
       return (
-          <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Logged In!
-            </Text>
-          </View>
+          <AppContainer />
         );
     } else {
       return (
