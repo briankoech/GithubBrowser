@@ -26,7 +26,7 @@ export default class AppContainer extends Component {
             icon={require('image!inbox')}
             onPress={() => this.setState({selectedTab: 'feed'})}
             >
-              <Text style={styles.welcome}>Tab 1</Text>
+              <Text style={styles.welcome}>This is the first tab</Text>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="Search"
@@ -34,7 +34,7 @@ export default class AppContainer extends Component {
             icon={require('image!search')}
             onPress={() => this.setState({selectedTab: 'search'})}
             >
-              <Text style={styles.welcome}>Tab 2</Text>
+              <Text style={styles.welcome}>This is the second tab</Text>
           </TabBarIOS.Item>
         </TabBarIOS>
       );
