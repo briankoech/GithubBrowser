@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TabBarIOS
  } from 'react-native';
+ import Feed from './Feed';
 
 export default class AppContainer extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class AppContainer extends Component {
             icon={require('image!inbox')}
             onPress={() => this.setState({selectedTab: 'feed'})}
             >
-              <Text style={styles.welcome}>This is the first tab</Text>
+            <Feed />
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="Search"

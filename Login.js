@@ -20,7 +20,6 @@ export default class Login extends Component {
   }
   onLogginPressed() {
     this.setState({showProgress: true});
-
     authService.login({
       username: this.state.username,
       password: this.state.password
