@@ -12,12 +12,12 @@ class AuthService {
         return cb(err);
       }
       if(!val) {
-        cb();
+        return cb();
       }
 
       let zippedObj = _.fromPairs(val);
       if(!zippedObj[authKey]) {
-        cb();
+        return cb();
       }
       let authInfo = {
         header: {
