@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ListView
+  ListView,
+  ActivityIndicatorIOS
  } from 'react-native';
 
 export default class Feed extends Component {
@@ -15,7 +16,8 @@ export default class Feed extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.state = {
-      dataSource: ds.cloneWithRows(['A', 'B', 'C'])
+      dataSource: ds,
+      showProgress: true
     };
   }
 
@@ -39,7 +41,8 @@ export default class Feed extends Component {
             console.log(this.state.dataSource.cloneWithRows(feedItems), feedItems);
             console.log(feedItems[0].actor.login);
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(feedItems)
+          dataSource: this.state.dataSource.cloneWithRows(feedItems),
+          showProgress: false
         });
       })
       .catch(function(err) {
@@ -60,6 +63,18 @@ export default class Feed extends Component {
     );
   }
   render() {
+    if (this.state.showProgress) {
+      return (
+        <View style={{
+            flex: 1,
+            justifyContent: 'center'
+          }}>
+          <ActivityIndicatorIOS
+            size="large"
+            animating={true} />
+        </View>
+      )
+    }
     return (
         <View style={{
             flex: 1,
