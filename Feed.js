@@ -10,6 +10,7 @@ import {
 export default class Feed extends Component {
   constructor(props) {
     super(props);
+
     var ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
@@ -18,10 +19,10 @@ export default class Feed extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log('1', this.state.dataSource);
+  componentWillMount() {
     this.fetchFeed();
   }
+
   fetchFeed = () => {
     require('./AuthService').getAuthInfo((err, authInfo) => {
       var url = 'https://api.github.com/users/'
@@ -35,8 +36,9 @@ export default class Feed extends Component {
       .then((responseData) => {
         var feedItems =
             responseData.filter((ev) => ev.type == 'PushEvent');
-            console.log('data', feedItems);
-        return this.setState({
+            console.log(this.state.dataSource.cloneWithRows(feedItems), feedItems);
+            console.log(feedItems[0].actor.login);
+        this.setState({
           dataSource: this.state.dataSource.cloneWithRows(feedItems)
         });
       })
@@ -44,16 +46,18 @@ export default class Feed extends Component {
         console.log(err);
       })
     });
-  }
-  renderRow = (rowData) => {
+  };
+  renderRow = (rowData, sectionId, rowId) => {
     return (<Text style={{
       color: '#333',
       backgroundColor: '#fff',
       alignSelf: 'center'
     }}>
-      {rowData}
+    {typeof rowData == 'object' ?
+      rowData.actor.login : rowData
+    }
     </Text>
-  );
+    );
   }
   render() {
     return (
