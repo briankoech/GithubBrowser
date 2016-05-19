@@ -5,8 +5,13 @@ import {
   Text,
   View,
   ListView,
-  ActivityIndicatorIOS
+  ActivityIndicatorIOS,
+  Image,
+  TouchableHighlight
  } from 'react-native';
+
+ import moment from 'moment';
+ import PushPayload from './PushPayload';
 
 export default class Feed extends Component {
   constructor(props) {
@@ -47,19 +52,60 @@ export default class Feed extends Component {
       })
       .catch(function(err) {
         console.log(err);
-      })
+      });
     });
   };
-  renderRow = (rowData, sectionId, rowId) => {
-    return (<Text style={{
-      color: '#333',
-      backgroundColor: '#fff',
-      alignSelf: 'center'
-    }}>
-    {typeof rowData == 'object' ?
-      rowData.actor.login : rowData
-    }
-    </Text>
+
+  pressRow = (rowData) => {
+    this.props.navigator.push({
+      title: 'Push Event',
+      component: PushPayload,
+      passProps: {
+        pushEvent: rowData
+      }
+    });
+  }
+  renderRow = (rowData) => {
+    return (
+      <TouchableHighlight
+        onPress={() => this.pressRow(rowData)}
+        underlayColor="#DDD">
+        <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            padding: 20,
+            alignItems: 'center',
+            borderColor: '#D7D7D7',
+            borderBottomWidth: 1
+          }}>
+          <Image
+            source={{uri: rowData.actor.avatar_url}}
+            style={{
+              height: 36,
+              width: 36,
+              borderRadius: 18
+            }}
+            />
+          <View style={{
+              paddingLeft: 20
+            }}>
+            <Text style={{backgroundColor: '#fff'}}>
+              {moment(rowData.created_at).fromNow()}
+            </Text>
+            <Text style={{backgroundColor: '#fff', fontWeight: '600'}}>
+              {rowData.actor.login}
+            </Text>
+            <Text style={{backgroundColor: '#fff'}}>
+              {rowData.payload.ref.replace('refs/heads/', '')}
+            </Text>
+            <Text style={{backgroundColor: '#fff'}}>
+              at <Text style={{
+                fontWeight: '600'
+              }}>{rowData.repo.name}</Text>
+            </Text>
+          </View>
+        </View>
+      </TouchableHighlight>
     );
   }
   render() {

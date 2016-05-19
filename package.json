@@ -8,6 +8,7 @@
   "dependencies": {
     "buffer": "^4.6.0",
     "lodash": "^4.12.0",
+    "moment": "^2.13.0",
     "react": "^0.14.8",
     "react-native": "^0.25.1"
   },
