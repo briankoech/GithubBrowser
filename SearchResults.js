@@ -53,8 +53,14 @@ export default class SearchResults extends Component {
   };
 
   renderRow = (rowData) => {
+    console.log(rowData);
     return (
-      <View>
+      <View style={{
+          padding: 20,
+          borderColor: '#D7D7D7',
+          borderBottomWidth: 1,
+          backgroundColor: '#FFF'
+        }}>
         <Text style={{
             fontSize: 20,
             fontWeight: '600'
@@ -68,14 +74,30 @@ export default class SearchResults extends Component {
             marginTop: 20,
             marginBottom: 20
           }}>
-        </View>
-        <View style={styles.repoCell}>
-          <Image source={require('image!star')}
-            style={style.repoCellIcon}
-            ></Image>
-          <Text style={styles.repoCellLabel}>
-            {/*{rowData.stargazers_count}*/}
-          </Text>
+          <View style={styles.repoCell}>
+            <Image source={require('image!star')}
+              style={styles.repoCellIcon}
+              ></Image>
+            <Text style={styles.repoCellLabel}>
+              {rowData.stargazers_count}
+            </Text>
+          </View>
+          <View style={styles.repoCell}>
+            <Image source={require('image!fork')}
+              style={styles.repoCellIcon}
+              ></Image>
+            <Text style={styles.repoCellLabel}>
+              {rowData.forks}
+            </Text>
+          </View>
+          <View style={styles.repoCell}>
+            <Image source={require('image!issues2')}
+              style={styles.repoCellIcon}
+              ></Image>
+            <Text style={styles.repoCellLabel}>
+              {rowData.open_issues}
+            </Text>
+          </View>
         </View>
       </View>
     );
@@ -91,10 +113,12 @@ export default class SearchResults extends Component {
             size="large"
             animating={true} />
         </View>
-      )
+      );
     }
+
     return (
         <View style={{
+            marginTop: 50,
             flex: 1,
             justifyContent: 'flex-start'
           }}>
